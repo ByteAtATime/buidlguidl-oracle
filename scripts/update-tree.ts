@@ -7,7 +7,7 @@ import { writeFile } from "node:fs/promises";
 // --- creating the merkle tree ---
 const BUILDERS_ENDPOINT =
   process.env["BUILDERS_ENDPOINT"] ?? "https://buidlguidl-v3.ew.r.appspot.com/builders";
-const ADDRESSES_TREE_PATH = process.env["ADDRESSES_TREE_PATH"] ?? "addresses-tree.json";
+const ADDRESSES_TREE_PATH = process.env["ADDRESSES_TREE_PATH"] ?? "src/lib/addresses-tree.json";
 
 const res = await fetch(BUILDERS_ENDPOINT);
 const json = await res.json();

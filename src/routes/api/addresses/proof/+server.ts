@@ -1,10 +1,7 @@
 import { read } from "$app/server";
-import { env } from "$env/dynamic/private";
 import type { RequestHandler } from "@sveltejs/kit";
 import { StandardMerkleTree } from "@openzeppelin/merkle-tree";
 import { isAddress } from "ethers";
-
-const ADDRESSES_TREE_PATH = "/" + (env["ADDRESSES_TREE_PATH"] ?? "addresses-tree.json");
 
 export const GET: RequestHandler = async ({ url }) => {
   const address = url.searchParams.get("address");
@@ -13,7 +10,7 @@ export const GET: RequestHandler = async ({ url }) => {
     return new Response("Invalid address", { status: 400 });
   }
 
-  const treeData = await read(ADDRESSES_TREE_PATH).json();
+  const treeData = await read("/src/lib/addresses-tree.json").json();
 
   const tree = StandardMerkleTree.load(treeData);
 
