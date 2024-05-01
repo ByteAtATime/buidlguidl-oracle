@@ -1,9 +1,7 @@
 import { read } from "$app/server";
 import type { RequestHandler } from "@sveltejs/kit";
-import { env } from "$env/dynamic/private";
+import addressesTree from "$lib/addresses-tree.json?url";
 
-const ADDRESSES_TREE_PATH = "/" + (env["ADDRESSES_TREE_PATH"] ?? "addresses-tree.json");
-
-export const GET: RequestHandler = () => {
-  return read(ADDRESSES_TREE_PATH);
+export const GET: RequestHandler = async () => {
+  return read(addressesTree);
 };
