@@ -8,7 +8,12 @@ export const GET: RequestHandler = async ({ url }) => {
   const address = url.searchParams.get("address");
 
   if (!address || !isAddress(address)) {
-    return new Response("Invalid address", { status: 400 });
+    return new Response("Invalid address", {
+      status: 400,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
   }
 
   const treeData = await read(addressesTree).json();
@@ -18,8 +23,15 @@ export const GET: RequestHandler = async ({ url }) => {
   try {
     const proof = tree.getProof([address]);
 
-    return new Response(JSON.stringify(proof));
+    return new Response(JSON.stringify(proof), {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
   } catch {
-    return new Response("Address not found, make sure it is a BuidlGuidl member", { status: 404 });
+    return new Response("Address not found, make sure it is a BuidlGuidl member", {
+      status: 404,
+      headers: { "Access-Control-Allow-Origin": "*" },
+    });
   }
 };
