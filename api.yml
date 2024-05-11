@@ -81,5 +81,54 @@ paths:
                 type: string
               example: Address not found
       security: []
+  /api/buidlers/proof:
+    get:
+      summary: Retrieve the Merkle proof for a specific Buidler
+      tags:
+        - Buidlers
+      parameters:
+        - name: address
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+          description: The Ethereum address for which to retrieve the Merkle proof
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              example:
+                - "0xa63432221e410d098d85dae511b25232fb60df8eec8d56ff75fc44cb5f960819"
+                - "0x3294c6b0b4620cc8bb3803827565831fb6f54668eb747853f567f00c49cced36"
+                - "0x1262fcdcc9e7cfbb8fbd968db9ce6125035ab3ea4b9a80487641993b65360c7f"
+                - "0x8fe1547464856c7bd072b2758f0c247bc6f5bcfe81ec055959d2a694761f488b"
+                - "0xd8401469d0ca73cbd35918bafb8011f2514327357fcf93344bcb2669164bee23"
+                - "0x578ddd1a2088b5c1aac8f6fbf8cbee727e88827423e17209f5fab7e1dedd1cae"
+                - "0x7db71dedef28f1a1235c3661350be69cf6bec596917d3ea2f4080259a2125283"
+                - "0xf9f583b1a8150e2b0dd22508e769f1429ff63649588ac5c21d8e4549c4a80d07"
+                - "0x99945d9012f574040382dbe5e181f3e2fe8f37d605e1a0e52a4e6d316d2fa897"
+                - "0x8301cd939a646f765c1963d81dec969ef691f8aef97fb6e75140869a49461066"
+
+        "400":
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: Invalid address
+        "404":
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: Address not found
+      security: []
     servers:
       - url: "https://buidlers.byteatatime.dev"

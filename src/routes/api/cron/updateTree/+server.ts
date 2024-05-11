@@ -1,6 +1,6 @@
 import type { RequestHandler } from "@sveltejs/kit";
 import type { Config } from "@sveltejs/adapter-vercel";
-import { updateTree } from "$scripts/update-tree";
+import { update } from "$scripts/update";
 
 export const config: Config = {
   split: true,
@@ -18,7 +18,7 @@ export const GET: RequestHandler = async ({ request }) => {
     );
   }
 
-  await updateTree();
+  await update();
 
   return new Response(
     JSON.stringify({
