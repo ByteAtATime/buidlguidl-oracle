@@ -31,7 +31,7 @@ export const GET: RequestHandler = async ({ url }) => {
   try {
     const proof = tree.getProof(data);
 
-    return new Response(JSON.stringify(proof), {
+    return new Response(JSON.stringify({ proof, buidler }), {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
