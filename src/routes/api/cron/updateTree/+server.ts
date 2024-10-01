@@ -1,6 +1,7 @@
 import type { RequestHandler } from "@sveltejs/kit";
 import type { Config } from "@sveltejs/adapter-vercel";
 import { update } from "$scripts/update";
+import { env } from "$env/dynamic/private";
 
 export const config: Config = {
   split: true,
@@ -9,7 +10,7 @@ export const config: Config = {
 export const GET: RequestHandler = async ({ request }) => {
   const authorization = request.headers.get("Authorization");
 
-  if (authorization !== `Bearer ${process.env["CRON_SECRET"]}`) {
+  if (authorization !== `Bearer ${env["CRON_SECRET"]}`) {
     return new Response(
       JSON.stringify({
         status: 401,
